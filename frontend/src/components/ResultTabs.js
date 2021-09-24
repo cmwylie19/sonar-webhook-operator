@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
+import Title from "./Title";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -68,6 +69,7 @@ export default function ResultTabs(props) {
 
   return (
     <Box sx={{ width: '100%' }} id="tabs">
+      <Title>Given Analysis</Title>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" className={classes.root}>
           <Tab label="Item One" {...a11yProps(0)} />
