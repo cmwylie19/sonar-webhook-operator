@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Nav from "./components/Nav";
 import Theme from "./components/Theme";
 import ResultList from "./components/ResultList";
@@ -9,6 +9,8 @@ import Grid from "@mui/material/Grid";
 
 
 function App() {
+  useEffect(()=>{},[])
+  const [sonarResults, setSonarResults] = useState()
   return (
     <Theme>
       <Nav />
