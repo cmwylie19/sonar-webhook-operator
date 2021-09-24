@@ -1,0 +1,7 @@
+apiVersion: webhook.freshlist.us/v1alpha1
+kind: Webhook
+metadata:
+  name: webhook-sample
+spec:
+  # Add fields here
+  foo: bar
