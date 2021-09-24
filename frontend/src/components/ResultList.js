@@ -46,10 +46,11 @@ export default function ResultList() {
 
           return (
             <ListItem
+            onClick={()=>setClicked(value)}
             style={{backgroundColor:clicked===value?"#fbfbfb":"inherit", color:clicked===value?"#333":"inherit"}}
               key={value}
               secondaryAction={
-                <IconButton edge="end" aria-label="comments" onClick={()=>setClicked(value)}>
+                <IconButton edge="end" aria-label="comments">
                   <CommentIcon />
                 </IconButton>
               }
