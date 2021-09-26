@@ -1,10 +1,8 @@
 # Sonar Webhook Operator
-![Logo](logo-512.png =150x150)
 <img src="logo-512.png" alt="drawing" width="150"/>
 
 Project Components
 * [Webhook Backend](#webhook)
-   <!-- * [Nested something](#operator) -->
 * [Operator](#operator)
 * [GitHub Action](#github-action)
 
