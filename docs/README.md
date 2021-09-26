@@ -4,7 +4,7 @@
 
 Project Components
 * [Webhook Backend](#webhook)
-   * [Nested something](#operator)
+   <!-- * [Nested something](#operator) -->
 * [Operator](#operator)
 * [GitHub Action](#github-action)
 
