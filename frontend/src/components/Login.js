@@ -14,7 +14,7 @@ import { makeStyles } from "@mui/styles";
 import { green, grey } from "@material-ui/core/colors";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
-
+import API from '../utils'
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -56,12 +56,14 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
+    const api = new API()
     console.log({
       email: data.get("email"),
-      password: data.get("password"),
-      remember: data.get("remember"),
+      password: data.get("password")
     });
+    return api.authenticateUser(data.get("email"),data.get("password"))
+    // eslint-disable-next-line no-console
+   
   };
 
   return (
@@ -93,13 +95,14 @@ export default function Login() {
           >
             <TextField
               inputProps={{
-                autocomplete: "email",
+                // autocomplete: "email",
                 form: {
                   autocomplete: "off",
                 },
               }}
               margin="normal"
               className={classes.root}
+             
               id="email"
               label="Email Address"
               name="email"

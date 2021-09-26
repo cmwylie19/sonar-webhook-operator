@@ -9,6 +9,8 @@ import IconButton from "@mui/material/IconButton";
 import CommentIcon from "@mui/icons-material/Comment";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { green } from "@material-ui/core/colors";
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 import Title from "./Title";
 
 const theme = createTheme({
@@ -21,7 +23,7 @@ const theme = createTheme({
   },
 });
 
-export default function ResultList() {
+export default function ResultList({sonarResults}) {
   const [checked, setChecked] = useState([0]);
   const [clicked, setClicked] = useState();
   const handleToggle = (value) => () => {
@@ -41,7 +43,7 @@ export default function ResultList() {
     <ThemeProvider theme={theme}>
       <Title>All Analyses</Title>
       <List sx={{ width: "100%", maxWidth: "100%" }} id="resultlist">
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) => {
+        {sonarResults.map((value) => {
           const labelId = `checkbox-list-label-${value}`;
 
           return (
@@ -54,7 +56,7 @@ export default function ResultList() {
               key={value}
               secondaryAction={
                 <IconButton edge="end" aria-label="comments">
-                  <CommentIcon />
+                  {value.status==="SUCCESS"?<CheckIcon color="success" />:<CloseIcon color="error"/>}
                 </IconButton>
               }
               disablePadding
@@ -74,7 +76,7 @@ export default function ResultList() {
                     inputProps={{ "aria-labelledby": labelId }}
                   />
                 </ListItemIcon>
-                <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+                <ListItemText id={labelId} primary={`Project ${value.project.name}`} />
               </ListItemButton>
             </ListItem>
           );

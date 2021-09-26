@@ -17,7 +17,7 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 // Authenticate Endpoint
 func Authenticate(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	var creds models.Credentials
+	var creds models.User
 	_ = json.NewDecoder(r.Body).Decode(&creds)
 	user, err := controllers.GetUserByEmail(creds.Email)
 	if err != nil {

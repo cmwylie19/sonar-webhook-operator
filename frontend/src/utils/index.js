@@ -1,15 +1,41 @@
 import axios from "axios";
 
-const jwtConfig = (token) => {
-  headers: {
-    Authorization: "Bearer " + token;
-  }
-};
-const fetchSonarResults = () => {
-  return axios.get(URL, config);
-};
+const idTokenHelper = () => {
+  const { token } = JSON.parse(localStorage['token'] || '{"token":"test"}')
+  return token
+}
 
-const fetchToken = () => {
-  let body = {};
-  return axios.post(URL, config, body);
-};
+export default class API {
+
+  constructor(){
+     this.instance = axios.create({
+      baseURL: process.env.REACT_APP_BACKEND_URL,
+      timeout: 5000,
+      responseType: 'json'
+      // headers: {'Authorization': `Bearer ${idTokenHelper}`}
+    });
+    
+  }
+
+  fetchResults(){
+    return this.instance.get("/webhook/x/results")
+  }
+
+  checkToken(){
+    alert("Check Token")
+  }
+
+   async pingHealthCheck() {
+     let response = await this.instance.get("/webhook/healthz")
+     return response
+   }
+
+
+
+  async authenticateUser(email, password){
+    this.instance.post("/webhook/authenticate",{
+      email,
+      password
+    })
+  }
+}

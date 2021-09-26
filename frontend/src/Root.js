@@ -6,13 +6,17 @@ import ResultTabs from "./components/ResultTabs";
 import FilterField from "./components/FilterField";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-
+import API from './utils'
 function App() {
+  const [sonarResults, setSonarResults] = useState([])
+  const [token, setToken] = useState()
   useEffect(() => {
+    const api = new API()
+    return api.fetchResults().then(response=>setSonarResults(response.data))
     // Check token
     // if no token, redirect to login
   }, []);
-  const [sonarResults, setSonarResults] = useState();
+
   return (
     <Theme>
       <Nav />
@@ -23,25 +27,14 @@ function App() {
       >
         <Grid container spacing={7}>
           <Grid item xs={12} large={12}>
+            {JSON.stringify(sonarResults,undefined,2)}
             <FilterField />
           </Grid>
           <Grid item xs={12} md={8} lg={6}>
-            {/* <Paper
-            elevation={12}
-            color="primary"
-              sx={{
-                p: 2,
-                display: "flex",
-                flexDirection: "column",
-                width: "400px",
-                backgroundColor: "#676767"
-              }}
-            > */}
-            <ResultList />
-            {/* </Paper> */}
+            <ResultList sonarResults={sonarResults} />
           </Grid>
           <Grid item xs={12} md={12} lg={6}>
-            <ResultTabs />
+            <ResultTabs sonarResults={sonarResults} />
           </Grid>
         </Grid>
       </Container>
