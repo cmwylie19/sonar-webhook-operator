@@ -1,11 +1,12 @@
 # Sonar Webhook Operator
-![Logo](logo-512.png)
+![Logo](logo-512.png =150x150)
 <img src="logo-512.png" alt="drawing" width="150"/>
 
 Project Components
-- [Webhook Backend](#webhook)
-- [Operator](#operator)
-- [GitHub Action](#github-action)
+* [Webhook Backend](#webhook)
+   * [Nested something](#operator)
+* [Operator](#operator)
+* [GitHub Action](#github-action)
 
 ## Webhook
 _The webhook will be triggered from a HTTP POST request from sonarqube._
