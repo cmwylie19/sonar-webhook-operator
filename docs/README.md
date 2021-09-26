@@ -1,5 +1,5 @@
 # Sonar Webhook Operator
-<!-- ![Logo](logo-512.png) -->
+![Logo](logo-512.png)
 <img src="logo-512.png" alt="drawing" width="150"/>
 
 Project Components
