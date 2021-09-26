@@ -28,9 +28,6 @@ type WebhookSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Webhook. Edit webhook_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
-
 	// Secret is the key to generate the HMAC hex digest in the X-Sonar-Webhook-HMAC-SHA256 header.
 	Secret string `json:"secret"`
 }

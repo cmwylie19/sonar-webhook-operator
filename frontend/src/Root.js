@@ -1,20 +1,26 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "./components/Nav";
 import Theme from "./components/Theme";
 import ResultList from "./components/ResultList";
-import ResultTabs from "./components/ResultTabs"
-import FilterField from "./components/FilterField"
+import ResultTabs from "./components/ResultTabs";
+import FilterField from "./components/FilterField";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
-
 function App() {
-  useEffect(()=>{},[])
-  const [sonarResults, setSonarResults] = useState()
+  useEffect(() => {
+    // Check token
+    // if no token, redirect to login
+  }, []);
+  const [sonarResults, setSonarResults] = useState();
   return (
     <Theme>
       <Nav />
-      <Container component="main" maxWidth="lg" sx={{ mt: 4, mb: 4,marginTop:"50px" }}>
+      <Container
+        component="main"
+        maxWidth="lg"
+        sx={{ mt: 4, mb: 4, marginTop: "50px" }}
+      >
         <Grid container spacing={7}>
           <Grid item xs={12} large={12}>
             <FilterField />
@@ -31,11 +37,11 @@ function App() {
                 backgroundColor: "#676767"
               }}
             > */}
-              <ResultList />
+            <ResultList />
             {/* </Paper> */}
           </Grid>
           <Grid item xs={12} md={12} lg={6}>
-              <ResultTabs />
+            <ResultTabs />
           </Grid>
         </Grid>
       </Container>

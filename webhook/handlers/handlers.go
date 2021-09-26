@@ -14,6 +14,34 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "<h1 style=background-color:blue;text-align:center;color:red;>%s</h1><div style=text-align:center>%s</div>", "WebHook Operator", "Accepts POST requests from Sonarqube")
 }
 
+// Authenticate Endpoint
+func Authenticate(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var creds models.Credentials
+	_ = json.NewDecoder(r.Body).Decode(&creds)
+	user, err := controllers.GetUserByEmail(creds.Email)
+	if err != nil {
+		controllers.GetError(err, w)
+		return
+	}
+
+	match := controllers.CheckPasswordHash(creds.Password, user.Password)
+	if match {
+		// getToken()
+	} else {
+		fmt.Println("failure")
+		err := fmt.Errorf("Credential incorrect")
+		controllers.GetError(err, w)
+		return
+	}
+
+	result, _ := json.Marshal(user)
+	w.Write(result)
+}
+
+// Checktoken Endpoint
+func CheckToken(w http.ResponseWriter, r *http.Request) {}
+
 // Receive the data- dont store it
 func SonarEndpoint(w http.ResponseWriter, r *http.Request) {
 	// Set the Content-Type to Application/JSON

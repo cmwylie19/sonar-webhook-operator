@@ -22,7 +22,7 @@ export default function Nav() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Sonar Webhook
             </Typography>
-   
+
             <Typography variant="h6" component="div">
               Docs
             </Typography>

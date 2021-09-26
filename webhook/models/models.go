@@ -14,6 +14,13 @@ type ErrorResponse struct {
 	ErrorMessage string `json:"message"`
 }
 
+type User struct {
+	Email    string `bson:"email"`
+	Password string `bson:"password"`
+	// Remember creates a long lived token
+	Remember bool `bson:"remember"`
+}
+
 type SonarProject struct {
 	Key  string `json:"key"`
 	Name string `json:"name"`

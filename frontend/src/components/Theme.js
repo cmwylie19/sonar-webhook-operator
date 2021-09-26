@@ -8,7 +8,7 @@ export const pinkTheme = createMuiTheme({
     fontFamily: "Red Hat Text, sans-serif",
   },
   palette: {
-    mode: 'dark',
+    mode: "dark",
     primary: { main: grey[900], contrastText: grey[50] },
     secondary: { main: grey[900] },
     type: "dark",

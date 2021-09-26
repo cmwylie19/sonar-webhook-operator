@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -16,14 +16,14 @@ const theme = createTheme({
     fontFamily: "Red Hat Display",
   },
   palette: {
-      type:"dark",
+    type: "dark",
     secondary: { main: green[400] },
   },
 });
 
 export default function ResultList() {
   const [checked, setChecked] = useState([0]);
-  const [clicked, setClicked] = useState()
+  const [clicked, setClicked] = useState();
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -38,16 +38,19 @@ export default function ResultList() {
   };
 
   return (
-    <ThemeProvider theme={theme} >
-        <Title>All Analyses</Title>
+    <ThemeProvider theme={theme}>
+      <Title>All Analyses</Title>
       <List sx={{ width: "100%", maxWidth: "100%" }} id="resultlist">
-        {[0, 1, 2, 3,4,5,6,7,8,9].map((value) => {
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) => {
           const labelId = `checkbox-list-label-${value}`;
 
           return (
             <ListItem
-            onClick={()=>setClicked(value)}
-            style={{backgroundColor:clicked===value?"#fbfbfb":"inherit", color:clicked===value?"#333":"inherit"}}
+              onClick={() => setClicked(value)}
+              style={{
+                backgroundColor: clicked === value ? "#fbfbfb" : "inherit",
+                color: clicked === value ? "#333" : "inherit",
+              }}
               key={value}
               secondaryAction={
                 <IconButton edge="end" aria-label="comments">

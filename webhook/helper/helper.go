@@ -19,6 +19,7 @@ var mongoOnce sync.Once
 const (
 	DB      = "webhookdb"
 	RESULTS = "results"
+	USERS   = "users"
 )
 
 func GetMongoClient() (*mongo.Client, error) {
