@@ -15,10 +15,11 @@ type ErrorResponse struct {
 }
 
 type User struct {
+	First    string `bson:"first"`
+	Last     string `bson:"last"`
 	Email    string `bson:"email"`
 	Password string `bson:"password"`
-	// Remember creates a long lived token
-	Remember bool `bson:"remember"`
+	Token    string `bson:"token"`
 }
 
 type SonarProject struct {

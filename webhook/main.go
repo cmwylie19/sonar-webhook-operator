@@ -16,6 +16,7 @@ func HandleRequests() {
 	http.HandleFunc("/webhook/x/post", middleware.LoggingMiddleware(handlers.GetPostTest))
 	http.HandleFunc("/webhook/x/results", middleware.LoggingMiddleware(handlers.GetResults))
 	http.HandleFunc("/webhook/views", handlers.ViewHandler)
+	http.HandleFunc("/webhook/create", handlers.CreateUser)
 	fmt.Println("Serving from :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

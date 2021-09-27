@@ -16,6 +16,10 @@ docker build -t docker.io/cmwylie19/sonar-webhook .; docker push docker.io/cmwyl
 
 ## Test
 ```
+# Create a user 
+curl -X POST -d '{"First":"Casey","Last":"Wylie","Password":"password","Email":"cwylie@redhat.com"}' http://localhost:8080/webhook/create
+
+
 curl https://freshlist.us/webhook/healthz
 
 curl http://localhost:8080/webhook/x/results

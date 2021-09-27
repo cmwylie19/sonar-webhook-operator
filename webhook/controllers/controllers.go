@@ -6,13 +6,36 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"time"
 
 	"github.com/cmwylie19/sonar-webhook-operator/webhook/helper"
 	"github.com/cmwylie19/sonar-webhook-operator/webhook/models"
+	jwt "github.com/dgrijalva/jwt-go"
 	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/mgo.v2/bson"
 )
+
+// Generate a JWT Token
+func GenerateJWT(email string) (string, error) {
+	token := jwt.New(jwt.SigningMethodHS256)
+
+	claims := token.Claims.(jwt.MapClaims)
+
+	claims["authorized"] = true
+	claims["client"] = email
+	claims["exp"] = time.Now().Add(time.Minute * 30).Unix()
+
+	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
+
+	if err != nil {
+		fmt.Errorf("Something Went Wrong: %s", err.Error())
+		return "", err
+	}
+
+	return tokenString, nil
+}
 
 // Hash plaintext password
 func HashPassword(pw string) (string, error) {
@@ -58,11 +81,6 @@ func ReadAllResults() ([]models.WebHook, error) {
 
 	//Return result without any error.
 	return wh, nil
-
-}
-
-// POST /login (username, password)
-func AuthenticateUser(username, password string) {
 
 }
 
