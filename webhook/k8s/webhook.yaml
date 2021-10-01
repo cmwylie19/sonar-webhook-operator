@@ -1,76 +1,76 @@
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: sonar-webhook-db-pvc
-# spec:
-#   # storageClassName: generic
-#   accessModes:
-#   - ReadWriteOnce
-#   resources:
-#     requests:
-#       storage: 500Mi
-# ---
-# kind: PersistentVolume
-# apiVersion: v1
-# metadata:
-#   name: sonar-webhook-db-pv
-#   labels:
-#     type: local
-# spec:
-#   # storageClassName: generic
-#   claimRef:
-#     namespace: default
-#     name: sonar-webhook-db-pvc
-#   capacity:
-#     storage: 500Mi
-#   accessModes:
-#     - ReadWriteOnce
-#   hostPath:
-#     path: "/var/lib/mongo"
-# ---
-# apiVersion: apps/v1        
-# kind: Deployment
-# metadata:
-#   labels:          
-#     app: sonar-webhook-db
-#   name: sonar-webhook-db 
-# spec:         
-#   replicas: 1    
-#   selector: 
-#     matchLabels:
-#       app: sonar-webhook-db
-#   template:
-#     metadata:
-#       labels:
-#         app: sonar-webhook-db
-#     spec:
-#       containers:
-#       - name: mongodb
-#         volumeMounts:
-#           - mountPath: /var/lib/mongo
-#             name: mongo-sonar-webhook-db
-#         image: mongo:4.2
-#         ports:
-#         - containerPort: 27017
-#       volumes:
-#       - name: mongo-sonar-webhook-db
-#         persistentVolumeClaim:
-#           claimName: sonar-webhook-db-pvc
-#       restartPolicy: Always
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   labels:
-#     app: sonar-webhook-db
-#   name: sonar-webhook-db
-# spec:
-#   ports:
-#     - port: 27017
-#       targetPort: 27017
-#   selector:
-#     app: sonar-webhook-db
-# ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sonar-webhook-db-pvc
+spec:
+  # storageClassName: generic
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: sonar-webhook-db-pv
+  labels:
+    type: local
+spec:
+  # storageClassName: generic
+  claimRef:
+    namespace: default
+    name: sonar-webhook-db-pvc
+  capacity:
+    storage: 500Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/var/lib/mongo"
+---
+apiVersion: apps/v1        
+kind: Deployment
+metadata:
+  labels:          
+    app: sonar-webhook-db
+  name: sonar-webhook-db 
+spec:         
+  replicas: 1    
+  selector: 
+    matchLabels:
+      app: sonar-webhook-db
+  template:
+    metadata:
+      labels:
+        app: sonar-webhook-db
+    spec:
+      containers:
+      - name: mongodb
+        volumeMounts:
+          - mountPath: /var/lib/mongo
+            name: mongo-sonar-webhook-db
+        image: mongo:4.2
+        ports:
+        - containerPort: 27017
+      volumes:
+      - name: mongo-sonar-webhook-db
+        persistentVolumeClaim:
+          claimName: sonar-webhook-db-pvc
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: sonar-webhook-db
+  name: sonar-webhook-db
+spec:
+  ports:
+    - port: 27017
+      targetPort: 27017
+  selector:
+    app: sonar-webhook-db
+---
 apiVersion: v1
 kind: Service
 metadata:
