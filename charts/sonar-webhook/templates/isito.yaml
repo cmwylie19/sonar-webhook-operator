@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: default
+  namespace: default
+spec:
+  gateways:
+  - gateway
+  hosts:
+  - '*'
+  http:
+  - match:
+    - uri:
+        prefix: /webhook
+    route:
+    - destination:
+        host: sonar-webhook
+        port:
+          number: 8080
+  - match:
+    - uri:
+        prefix: /login
+    - uri:
+        prefix: /signup
+    - uri:
+        exact: /
+    - uri:
+        prefix: /static
+    route:
+    - destination:
+        host: webhook-frontend
+        port:
+          number: 80
