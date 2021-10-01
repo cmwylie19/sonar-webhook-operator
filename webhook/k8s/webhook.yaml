@@ -112,7 +112,7 @@ spec:
         - image: docker.io/cmwylie19/sonar-webhook:latest
           name: sonar-webhook
           env:
-            - name: SIGNING_KEY
+            - name: SECRET
               value: SECRET
             - name: MONGO_URL
               value: mongodb://sonar-webhook-db:27017

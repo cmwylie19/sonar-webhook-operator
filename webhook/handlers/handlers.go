@@ -44,6 +44,8 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 // Create User Handler
 func CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
 	var user models.User
 	_ = json.NewDecoder(r.Body).Decode(&user)
 	err := controllers.CreateUser(user)

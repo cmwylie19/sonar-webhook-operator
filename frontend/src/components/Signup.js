@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState} from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { green, grey } from "@material-ui/core/colors";
+import API from '../utils'
 
 const theme = createTheme({
   palette: {
@@ -23,14 +24,20 @@ const theme = createTheme({
 });
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+      email: email,
+      password: password,
     });
+    const api = new API()
+    let response = await api.createUser(email,password)
+    alert(JSON.stringify(response))
   };
 
   return (
@@ -58,39 +65,6 @@ export default function SignUp() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  inputProps={{
-                    autocomplete: "email",
-                    form: {
-                      autocomplete: "off",
-                    },
-                  }}
-                  autoComplete="fname"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  inputProps={{
-                    autocomplete: "email",
-                    form: {
-                      autocomplete: "off",
-                    },
-                  }}
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   inputProps={{
@@ -103,6 +77,8 @@ export default function SignUp() {
                   fullWidth
                   id="email"
                   label="Email Address"
+                  value={email}
+                  onChange={e=>setEmail(e.target.value)}
                   name="email"
                   autoComplete="email"
                 />
@@ -119,6 +95,8 @@ export default function SignUp() {
                   fullWidth
                   name="password"
                   label="Password"
+                  value={password}
+                  onChange={e=>setPassword(e.target.value)}
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -137,6 +115,8 @@ export default function SignUp() {
                   name="password"
                   label="Password"
                   type="password"
+                  value={confirmPassword}
+                  onChange={e=>setConfirmPassword(e.target.value)}
                   id="password"
                   autoComplete="new-password"
                 />

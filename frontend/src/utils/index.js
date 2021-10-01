@@ -30,7 +30,10 @@ export default class API {
      return response
    }
 
-
+   async createUser(email, password) {
+     let response = await this.instance.post("/webhook/create",{email, password})
+     return response
+   }
 
   async authenticateUser(email, password){
     this.instance.post("/webhook/authenticate",{
