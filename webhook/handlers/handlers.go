@@ -29,13 +29,22 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 	if match {
 		// getToken()
 		fmt.Println("Correct Credentials")
-		controllers.SuccessResponse("Correct creds", w)
+		// controllers.SuccessResponse("Correct creds", w)
 	} else {
 		fmt.Println("failure")
 		err := fmt.Errorf("credential incorrect")
 		controllers.GetError(err, w)
 		return
 	}
+
+	validToken, err := controllers.GenerateJWT(creds.Email)
+	if err != nil {
+		fmt.Println("Failed to generate token: ", err.Error())
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	user.Token = validToken
 
 	result, _ := json.Marshal(user)
 	w.Write(result)
@@ -44,7 +53,6 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 // Create User Handler
 func CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	var user models.User
 	_ = json.NewDecoder(r.Body).Decode(&user)
