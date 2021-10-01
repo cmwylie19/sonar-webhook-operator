@@ -61,10 +61,12 @@ brew services start mongodb-community
 
 # Run the webhook (Go backend)
 # In the /webhook directory
+go mod tidy
 SECRET=secret MONGO_URL=mongodb://localhost:27017 go run main.go    
 
 # Run the frontend
 # In the /frontend directory
+yarn
 REACT_APP_BACKEND_URL=http://localhost:8080 yarn start
 
 ```

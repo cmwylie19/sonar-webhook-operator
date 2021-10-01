@@ -42,7 +42,7 @@ spec:
           env:
             - name: REACT_APP_ENV
               value: prod
-            - name: REACT_APP_THEME
+            - name: REACT_APP_BACKEND_URL
               value: dark
           ports:
             - containerPort: 80
