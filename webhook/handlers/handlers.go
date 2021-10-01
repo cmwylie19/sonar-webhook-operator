@@ -11,7 +11,7 @@ import (
 
 // ViewHandler for the UI
 func ViewHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "<h1 style=background-color:blue;text-align:center;color:red;>%s</h1><div style=text-align:center>%s</div>", "WebHook Operator", "Accepts POST requests from Sonarqube")
+	fmt.Fprintf(w, "<div style=background-color: black;><h1 style=text-align:center;color:red;>%s</h1><div style=text-align:center;>%s</div></div>", "WebHook Operator", "Backend working")
 }
 
 // Authenticate Endpoint

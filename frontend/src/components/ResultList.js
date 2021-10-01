@@ -9,8 +9,8 @@ import IconButton from "@mui/material/IconButton";
 import CommentIcon from "@mui/icons-material/Comment";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { green } from "@material-ui/core/colors";
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
 import Title from "./Title";
 
 const theme = createTheme({
@@ -23,7 +23,7 @@ const theme = createTheme({
   },
 });
 
-export default function ResultList({sonarResults}) {
+export default function ResultList({ sonarResults }) {
   const [checked, setChecked] = useState([0]);
   const [clicked, setClicked] = useState();
   const handleToggle = (value) => () => {
@@ -56,7 +56,11 @@ export default function ResultList({sonarResults}) {
               key={value}
               secondaryAction={
                 <IconButton edge="end" aria-label="comments">
-                  {value.status==="SUCCESS"?<CheckIcon color="success" />:<CloseIcon color="error"/>}
+                  {value.status === "SUCCESS" ? (
+                    <CheckIcon color="success" />
+                  ) : (
+                    <CloseIcon color="error" />
+                  )}
                 </IconButton>
               }
               disablePadding
@@ -76,7 +80,10 @@ export default function ResultList({sonarResults}) {
                     inputProps={{ "aria-labelledby": labelId }}
                   />
                 </ListItemIcon>
-                <ListItemText id={labelId} primary={`Project ${value.project.name}`} />
+                <ListItemText
+                  id={labelId}
+                  primary={`Project ${value.project.name}`}
+                />
               </ListItemButton>
             </ListItem>
           );

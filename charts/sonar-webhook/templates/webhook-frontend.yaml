@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: webhook-frontend
+    version: v1
+  name: webhook-frontend
+  namespace: default
+spec:
+  ports:
+    - port: 80
+      name: http
+  selector:
+    app: webhook-frontend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webhook-frontend
+    version: v1
+  name: webhook-frontend
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: webhook-frontend
+      version: v1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: webhook-frontend
+        version: v1
+      annotations:
+        proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+    spec:
+      serviceAccountName: webhook-frontend
+      containers:
+        - image: docker.io/cmwylie19/webhook-frontend:latest
+          name: webhook-frontend
+          env:
+            - name: REACT_APP_ENV
+              value: prod
+            - name: REACT_APP_BACKEND_URL
+              value: dark
+          ports:
+            - containerPort: 80
+              name: http
+          imagePullPolicy: Always
+          # resources:
+          #   limits:
+          #     cpu: 1
+          #     memory: 200m
+          #   requests:
+          #     memory: 100m
+          #     cpu: 500m
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: webhook-frontend

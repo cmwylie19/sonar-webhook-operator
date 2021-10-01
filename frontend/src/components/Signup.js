@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { green, grey } from "@material-ui/core/colors";
-import API from '../utils'
+import API from "../utils";
 
 const theme = createTheme({
   palette: {
@@ -24,9 +24,9 @@ const theme = createTheme({
 });
 
 export default function SignUp() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -35,9 +35,9 @@ export default function SignUp() {
       email: email,
       password: password,
     });
-    const api = new API()
-    let response = await api.createUser(email,password)
-    alert(JSON.stringify(response))
+    const api = new API();
+    let response = await api.createUser(email, password);
+    alert(JSON.stringify(response));
   };
 
   return (
@@ -78,7 +78,7 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   value={email}
-                  onChange={e=>setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   name="email"
                   autoComplete="email"
                 />
@@ -96,7 +96,7 @@ export default function SignUp() {
                   name="password"
                   label="Password"
                   value={password}
-                  onChange={e=>setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -116,7 +116,7 @@ export default function SignUp() {
                   label="Password"
                   type="password"
                   value={confirmPassword}
-                  onChange={e=>setConfirmPassword(e.target.value)}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   id="password"
                   autoComplete="new-password"
                 />
