@@ -52,16 +52,20 @@ export default function Login() {
     // attempt to login user
     // if successful, push to app
   }, []);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const classes = useStyles();
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    alert("email: " + email + " password: " + password);
     const api = new API();
     console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+      email: email,
+      password: password,
     });
-    return api.authenticateUser(data.get("email"), data.get("password"));
+    let response = await api.authenticateUser(email, password);
+
+    alert(JSON.stringify(response, undefined, 2));
     // eslint-disable-next-line no-console
   };
 
@@ -103,6 +107,8 @@ export default function Login() {
               className={classes.root}
               id="email"
               label="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               name="email"
               fullWidth
               variant="filled"
@@ -121,6 +127,8 @@ export default function Login() {
               label="Password"
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               fullWidth
               variant="filled"
               autoFocus
