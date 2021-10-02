@@ -15,7 +15,7 @@ bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
 
 Quick Build
 ```
-docker build -t docker.io/cmwylie19/sonar-webhook .; docker push docker.io/cmwylie19/sonar-webhook
+docker build -t docker.io/cmwylie19/sonar-webhook .; docker push docker.io/cmwylie19/sonar-webhook; k rollout restart deploy/sonar-webhook
 ```
 
 ## Test

@@ -27,27 +27,25 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 
 	match := controllers.CheckPasswordHash(creds.Password, user.Password)
 	if match {
-		// getToken()
-		fmt.Println("Correct Credentials")
-		// controllers.SuccessResponse("Correct creds", w)
+		validToken, err := controllers.GenerateJWT(creds.Email)
+		if err != nil {
+			fmt.Println("Failed to generate token: ", err.Error())
+			w.WriteHeader(http.StatusInternalServerError)
+			controllers.GetError(err, w)
+			return
+		}
+
+		user.Token = validToken
+		user.Password = ""
+
+		result, _ := json.Marshal(user)
+		w.Write(result)
 	} else {
 		fmt.Println("failure")
 		err := fmt.Errorf("credential incorrect")
 		controllers.GetError(err, w)
 		return
 	}
-
-	validToken, err := controllers.GenerateJWT(creds.Email)
-	if err != nil {
-		fmt.Println("Failed to generate token: ", err.Error())
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
-
-	user.Token = validToken
-
-	result, _ := json.Marshal(user)
-	w.Write(result)
 }
 
 // Create User Handler

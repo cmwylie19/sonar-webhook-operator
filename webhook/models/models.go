@@ -15,8 +15,6 @@ type ErrorResponse struct {
 }
 
 type User struct {
-	First    string `bson:"first"`
-	Last     string `bson:"last"`
 	Email    string `bson:"email"`
 	Password string `bson:"password"`
 	Token    string `bson:"token"`

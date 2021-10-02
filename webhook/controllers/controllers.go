@@ -25,6 +25,7 @@ func GenerateJWT(email string) (string, error) {
 
 	claims["authorized"] = true
 	claims["client"] = email
+	claims["issuer"] = "freshlist.us"
 	claims["exp"] = time.Now().Add(time.Minute * 30).Unix()
 
 	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
