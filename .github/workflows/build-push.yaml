@@ -37,7 +37,7 @@ jobs:
           node sonarqube-scanner.js
 
   setup-build-push-deploy:
-    # needs: static-code-analysis
+    needs: static-code-analysis
     name: test-push-build
     runs-on: ubuntu-latest
     steps:
