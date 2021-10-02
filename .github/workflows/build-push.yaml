@@ -6,56 +6,36 @@ env:
   GKE_ZONE: us-east1-b 
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 jobs:
-  unit-test:
-    name: unit-test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-
-      - name: Unit Test Frontend
-        run: | 
-          cd frontend;
-          yarn -s;
-          yarn run test;
-          echo "Exited with '$?'"
-
-  static-code-analysis:
-    needs: unit-test
-    name: static-code-analysis
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-
-      # - name: SonarQube Scan
-      #   uses: kitabisa/sonarqube-action@v1.1.0
-      #   with:
-      #     host: ${{ secrets.SONARQUBE_HOST }}
-      #     login: ${{ secrets.SONAR_TOKEN }}
-      #     projectBaseDir: src
-      #     projectKey: frontend
-      #     projectName: FreshlistV2-frontend
-
-
-
-      - name: Analyze Frontend
-        run: | 
-          cd frontend;
-          yarn -s;
-          # necessary to collect coverage
-          yarn run coverage;
-          node sonarqube-scanner.js
-  # performance-job:
-  #   name: performance-job
+  # unit-test:
+  #   name: unit-test
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Check out repository code
   #       uses: actions/checkout@v2
-  #     - name: Step 2
-  #       run: env | sort
-  #     - name: Say Hello
-  #       run: echo "performance"
+
+  #     - name: Unit Test Frontend
+  #       run: | 
+  #         cd frontend;
+  #         yarn -s;
+  #         yarn run test;
+  #         echo "Exited with '$?'"
+
+  # static-code-analysis:
+  #   needs: unit-test
+  #   name: static-code-analysis
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v2
+
+  #     - name: Analyze Frontend
+  #       run: | 
+  #         cd frontend;
+  #         yarn -s;
+  #         # necessary to collect coverage
+  #         yarn run coverage;
+  #         node sonarqube-scanner.js
+
   setup-build-push-deploy:
     needs: static-code-analysis
     name: test-push-build
