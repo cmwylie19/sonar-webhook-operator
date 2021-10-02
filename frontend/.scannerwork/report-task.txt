@@ -2,5 +2,5 @@ projectKey=sonar-webhook-frontend
 serverUrl=http://34.75.152.50:9000
 serverVersion=7.9.2.30863
 dashboardUrl=http://34.75.152.50:9000/dashboard?id=sonar-webhook-frontend
-ceTaskId=AXwY-Z7GRXg0wP_QX2hI
-ceTaskUrl=http://34.75.152.50:9000/api/ce/task?id=AXwY-Z7GRXg0wP_QX2hI
+ceTaskId=AXxBAxWlRXg0wP_QX2hJ
+ceTaskUrl=http://34.75.152.50:9000/api/ce/task?id=AXxBAxWlRXg0wP_QX2hJ

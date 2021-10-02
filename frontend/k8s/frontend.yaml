@@ -43,7 +43,7 @@ spec:
             - name: REACT_APP_ENV
               value: prod
             - name: REACT_APP_BACKEND_URL
-              value: dark
+              value: https://freshlist.us
           ports:
             - containerPort: 80
               name: http
