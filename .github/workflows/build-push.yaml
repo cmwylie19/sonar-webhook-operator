@@ -2,39 +2,39 @@ name: Build/Push Action
 on: [push]
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: freshlist-v1
+  GKE_CLUSTER: freshlist-v2
   GKE_ZONE: us-east1-b 
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 jobs:
-  # unit-test:
-  #   name: unit-test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Check out repository code
-  #       uses: actions/checkout@v2
+  unit-test:
+    name: unit-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
 
-  #     - name: Unit Test Frontend
-  #       run: | 
-  #         cd frontend;
-  #         yarn -s;
-  #         yarn run test;
-  #         echo "Exited with '$?'"
+      - name: Unit Test Frontend
+        run: | 
+          cd frontend;
+          yarn -s;
+          yarn run test;
+          echo "Exited with '$?'"
 
-  # static-code-analysis:
-  #   needs: unit-test
-  #   name: static-code-analysis
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Check out repository code
-  #       uses: actions/checkout@v2
+  static-code-analysis:
+    needs: unit-test
+    name: static-code-analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
 
-  #     - name: Analyze Frontend
-  #       run: | 
-  #         cd frontend;
-  #         yarn -s;
-  #         # necessary to collect coverage
-  #         yarn run coverage;
-  #         node sonarqube-scanner.js
+      - name: Analyze Frontend
+        run: | 
+          cd frontend;
+          yarn -s;
+          # necessary to collect coverage
+          yarn run coverage;
+          node sonarqube-scanner.js
 
   setup-build-push-deploy:
     # needs: static-code-analysis
